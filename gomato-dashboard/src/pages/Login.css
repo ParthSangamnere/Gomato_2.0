@@ -1,0 +1,433 @@
+/* ============================================================
+   Login.css — Pixel-perfect Zomato Login UI recreation
+   Based on: ZomatoLogin.kt + JomatoTheme.kt source analysis
+   Design: Light background, red gradient header, card layout
+   ============================================================ */
+
+.login-root {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Red gradient header wash (from ZomatoLogin.kt BrandLight gradient) ── */
+.login-root::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 300px;
+  background: linear-gradient(180deg, var(--brand-light) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Top bar with logo ── */
+.login-topbar {
+  width: 100%;
+  padding: 20px 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.login-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--brand);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(226, 55, 68, 0.3);
+}
+
+.login-logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--brand);
+  letter-spacing: -0.5px;
+}
+
+/* ── Card container ── */
+.login-card-wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px 16px 0;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Heading area (animated) ── */
+.login-heading {
+  padding: 0 8px;
+  margin-bottom: 32px;
+}
+
+.login-heading h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--brand);
+  line-height: 1.2;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.login-heading .subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* OTP heading variant */
+.login-heading h1.otp-title {
+  color: var(--text-primary);
+  font-size: 26px;
+}
+
+.otp-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.otp-subtitle-row span {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.otp-subtitle-row .phone-highlight {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.otp-edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 2px;
+}
+
+.otp-edit-btn:hover { background: var(--brand-light); }
+
+/* ── Input fields (matching OutlinedTextField style) ── */
+.field-group {
+  margin-bottom: 20px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--divider);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(226, 55, 68, 0.1);
+}
+
+/* Country code prefix — matches Jomato's +91 | divider design */
+.input-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 12px 0 16px;
+  gap: 10px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.input-prefix .country-code {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.input-prefix .flag {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.input-prefix-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--text-secondary);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.input-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: 14px 16px;
+  width: 100%;
+}
+
+.input-field::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Loader inside input (trailing icon for OTP screen) */
+.input-trailing {
+  padding-right: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* ── OTP Method chips (SMS / WhatsApp / Call) ── */
+.otp-method-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.otp-method-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.otp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--divider);
+  background: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.otp-chip:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: var(--brand-light);
+}
+
+.otp-chip.selected {
+  border-color: var(--brand);
+  background: var(--brand-light);
+  color: var(--brand);
+}
+
+.otp-chip svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* ── Primary CTA Button (JomatoButton style) ── */
+.btn-primary {
+  width: 100%;
+  height: 50px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 16px rgba(226, 55, 68, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--brand-dark);
+  box-shadow: 0 6px 20px rgba(226, 55, 68, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(226, 55, 68, 0.3);
+}
+
+.btn-primary:disabled {
+  background: rgba(226, 55, 68, 0.35);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+.spinner.sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+  border-color: rgba(226,55,68,0.3);
+  border-top-color: var(--brand);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Slide animation between Phone & OTP screens ── */
+.slide-enter {
+  animation: slideInRight 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-exit {
+  animation: slideOutLeft 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slideOutLeft {
+  from { transform: translateX(0);   opacity: 1; }
+  to   { transform: translateX(-40px); opacity: 0; }
+}
+
+/* ── Disclaimer (bottom of screen) ── */
+.login-disclaimer {
+  text-align: center;
+  font-size: 11.5px;
+  font-style: italic;
+  color: var(--text-muted);
+  padding: 28px 16px 32px;
+  line-height: 1.6;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* ── Error toast ── */
+.error-toast {
+  background: #1C1C1C;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 0.2s ease;
+}
+
+@keyframes fadeUp {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* ── Full-page loading overlay ── */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(249,249,249,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(2px);
+}
+
+.loading-overlay .spinner {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+  border-color: rgba(226,55,68,0.2);
+  border-top-color: var(--brand);
+}
+
+/* ── Resend OTP section ── */
+.resend-row {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.resend-btn {
+  background: none;
+  border: none;
+  color: var(--brand);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.resend-btn:disabled {
+  color: var(--text-muted);
+  cursor: default;
+  text-decoration: none;
+}
+
+.resend-timer {
+  font-weight: 600;
+  color: var(--text-primary);
+}

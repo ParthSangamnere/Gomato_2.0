@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: gomato-api
+    runtime: node
+    buildCommand: ./build.sh
+    startCommand: node gomato-backend/src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: PORT
+        value: 3001

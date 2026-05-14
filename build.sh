@@ -4,8 +4,8 @@ set -o errexit
 
 # Build Frontend
 cd gomato-dashboard
-npm install
-npm run build
+npm install --include=dev
+npx vite build
 
 # Build Backend
 cd ../gomato-backend

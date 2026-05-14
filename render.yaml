@@ -2,6 +2,7 @@ services:
   - type: web
     name: gomato-api
     runtime: node
+    plan: free
     buildCommand: ./build.sh
     startCommand: node gomato-backend/src/index.js
     envVars:
